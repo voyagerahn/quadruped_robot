@@ -34,7 +34,7 @@ int spaceCounter = 0;
 
 boolean newData = false;
 
-//int pulse0, pulse1, pulse2, pulse3, pulse4, pulse5, pulse6, pulse7, pulse8, pulse9, pulse10, pulse11;
+int FR_angles_1, FR_angles_2, FR_angles_3, FL_angles_1, FL_angles_2, FL_angles_3, BR_angles_1, BR_angles_2, BR_angles_3, BL_angles_1, BL_angles_2, BL_angles_3;
 
 char a;
 int pulse[12];
@@ -118,83 +118,76 @@ void recvWithStartEndMarkers() {
       }
       else if (rc == spaceMarker ) {
         receivedChars[ndx] = '\0';
-        for (int i = 0; i < 12; i++) {
-          if (spaceCounter == i) {
-            //Serial.println(receivedChars);
-            pulse[i] = atoi(receivedChars);
-            spaceCounter++;
-            ndx = 0;
-          }
-        }
-        /*if (spaceCounter == 0) {
+        
+        if (spaceCounter == 0) {
           //Serial.println(receivedChars);
-          pulse0 = atoi(receivedChars);
+          FR_angles_1 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 1) {
           //Serial.println(receivedChars);
-          pulse1 = atoi(receivedChars);
+          FR_angles_2 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 2) {
           //Serial.println(receivedChars);
-          pulse2 = atoi(receivedChars);
+          FR_angles_3 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 3) {
           //Serial.println(receivedChars);
-          pulse3 = atoi(receivedChars);
+          FL_angles_1 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 4) {
           //Serial.println(receivedChars);
-          pulse4 = atoi(receivedChars);
+          FL_angles_2 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 5) {
           //Serial.println(receivedChars);
-          pulse5 = atoi(receivedChars);
+          FL_angles_3 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 6) {
           //Serial.println(receivedChars);
-          pulse6 = atoi(receivedChars);
+          BR_angles_1 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 7) {
           //Serial.println(receivedChars);
-          pulse7 = atoi(receivedChars);
+          BR_angles_2= atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 8) {
           //Serial.println(receivedChars);
-          pulse8 = atoi(receivedChars);
+          BR_angles_3 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 9) {
           //Serial.println(receivedChars);
-          pulse9 = atoi(receivedChars);
+          BL_angles_1 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 10) {
           //Serial.println(receivedChars);
-          pulse10 = atoi(receivedChars);
+          BL_angles_2 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
           else if (spaceCounter == 11) {
           //Serial.println(receivedChars);
-          pulse11 = atoi(receivedChars);
+          BL_angles_3 = atoi(receivedChars);
           spaceCounter++;
           ndx = 0;
           }
@@ -202,12 +195,12 @@ void recvWithStartEndMarkers() {
           else {
           receivedChars[ndx] = '\0'; // terminate the string
           //Serial.println(receivedChars);
-          pulse11 = atoi(receivedChars);
+          BL_angles_3 = atoi(receivedChars);
           recvInProgress = false;
           ndx = 0;
           spaceCounter = 0;
           newData = true;
-          }*/
+          }
       }
 
       else if (rc == startMarker) {

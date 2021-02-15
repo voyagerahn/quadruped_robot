@@ -51,7 +51,7 @@ void setup() {
   pinMode(10,OUTPUT);
   pinMode(9,OUTPUT);
   
-  IMUSetup();
+
   connectServos();
   
   
@@ -71,7 +71,7 @@ void loop() {
       Serial.print("#");
       previousLooptime = currentMillis;
 
-      readAngles();
+     
           
       recvWithStartEndMarkers();
       
