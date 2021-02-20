@@ -56,7 +56,7 @@ class ArduinoSerial:  # class for communication with arduino via serial, starts 
                     byteCount += 1
                 x = self.arduino.read()
 
-            loopTime, Xacc, Yacc, roll, pitch = numpy.fromstring(getSerialValue.decode('ascii', errors='replace'),
+            loopTime, Xacc, Yacc, roll, pitch = np.fromstring(getSerialValue.decode('ascii', errors='replace'),
                                                                  sep='#')
         #             print(loopTime , roll , pitch)
 

@@ -11,6 +11,7 @@ from src.multiprocess_kb import KeyInterrupt
 from src.serial import ArduinoSerial
 from src.State import State
 from multiprocessing import Process
+#from src.HardwareInterface import HardwareInterface
 
 def consoleClear():
     # for windows
@@ -44,7 +45,7 @@ def main(id,command_status):
 
         # calculate robot step command from keyboard inputs
         result_dict = command_status.get()
-        print(result_dict)
+        #print(result_dict)
         command_status.put(result_dict)
 
         x_vel = result_dict['IDstepLength']
@@ -52,14 +53,16 @@ def main(id,command_status):
         command.yaw_rate = result_dict['IDstepAlpha']
         command.horizontal_velocity=np.array([x_vel, y_vel])
 
-        #arduinoLoopTime, Xacc, Yacc, realRoll, realPitch = arduino.serialRecive()  # recive serial(IMU part)
+        arduinoLoopTime, Xacc, Yacc, realRoll, realPitch = arduino.serialRecive()  # recive serial(IMU part)
+
 
         # Read imu data. Orientation will be None if no data was available
-        quat_orientation = ( np.array([1, 0, 0, 0])   )
+        quat_orientation = (np.array([1, 0, 0, 0]))
         state.quat_orientation = quat_orientation
 
         # Step the controller forward by dt
         controller.run(state, command)
+        deg_angle=np.rad2deg(state.joint_angles)  # make angle rad to deg
 
 
         arduino.serialSend(state.joint_angles[:,0],state.joint_angles[:,1],state.joint_angles[:,2],state.joint_angles[:,3])

@@ -34,8 +34,6 @@ int spaceCounter = 0;
 
 boolean newData = false;
 
-int FR_angles_1, FR_angles_2, FR_angles_3, FL_angles_1, FL_angles_2, FL_angles_3, BR_angles_1, BR_angles_2, BR_angles_3, BL_angles_1, BL_angles_2, BL_angles_3;
-
 char a;
 int pulse[12];
 int batterieVoltage;
@@ -52,6 +50,8 @@ void setup() {
   pinMode(11, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(9, OUTPUT);
+  setPulse();
+  moveServos(pulse);
   //IMUSetup();
   //connectServos(); //서보모터 I2C통신으로 연결 방법 다름
 
@@ -67,7 +67,7 @@ void loop() {
     t = float(currentMillis) / 1000;
     /////////cuenta el tiempo que tarda el bucle en ejecutarse
     loopTime = currentMillis - previousLooptime;
-    //Serial.print("<"); Serial.print(loopTime); Serial.print("#0#0#0"); Serial.print(">"); //IMU의 값 0으로 집어넣음
+    Serial.print("<"); Serial.print(loopTime); Serial.print("#0#0#0#0"); Serial.print(">"); //IMU의 값 0으로 집어넣음
     previousLooptime = currentMillis;
 
     //readAngles(); IMU 연결 안됨
@@ -81,7 +81,7 @@ void loop() {
   }
 }
 
-void setPulse() {
+void setPulse() {         //set initialization
   for (int i = 0 ; i < 12; i++) {
     pulse[i] = 0;
   }
@@ -90,8 +90,7 @@ void setPulse() {
 void moveServos(int *pulse) {
 
   for (int i = 0 ; i < 12; i++) {
-    int ra = constrain(map(pulse[i], 0, 180, 180, 440), 180, 440);
-    pwm.setPWM(i, 0, ra);
+    pwm.setPWM(i, 0, pulse[i]);
   }
 }
 
@@ -118,97 +117,109 @@ void recvWithStartEndMarkers() {
       }
       else if (rc == spaceMarker ) {
         receivedChars[ndx] = '\0';
-        
+
         if (spaceCounter == 0) {
           //Serial.println(receivedChars);
-          FR_angles_1 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[0]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 1) {
+        }
+        else if (spaceCounter == 1) {
           //Serial.println(receivedChars);
-          FR_angles_2 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[1]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 2) {
+        }
+        else if (spaceCounter == 2) {
           //Serial.println(receivedChars);
-          FR_angles_3 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[2]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 3) {
+        }
+        else if (spaceCounter == 3) {
           //Serial.println(receivedChars);
-          FL_angles_1 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[3]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 4) {
+        }
+        else if (spaceCounter == 4) {
           //Serial.println(receivedChars);
-          FL_angles_2 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[4]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 5) {
+        }
+        else if (spaceCounter == 5) {
           //Serial.println(receivedChars);
-          FL_angles_3 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[5]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 6) {
+        }
+        else if (spaceCounter == 6) {
           //Serial.println(receivedChars);
-          BR_angles_1 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[6]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 7) {
+        }
+        else if (spaceCounter == 7) {
           //Serial.println(receivedChars);
-          BR_angles_2= atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[7]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 8) {
+        }
+        else if (spaceCounter == 8) {
           //Serial.println(receivedChars);
-          BR_angles_3 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[8]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 9) {
+        }
+        else if (spaceCounter == 9) {
           //Serial.println(receivedChars);
-          BL_angles_1 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[9]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 10) {
+        }
+        else if (spaceCounter == 10) {
           //Serial.println(receivedChars);
-          BL_angles_2 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[10]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          else if (spaceCounter == 11) {
+        }
+        else if (spaceCounter == 11) {
           //Serial.println(receivedChars);
-          BL_angles_3 = atoi(receivedChars);
+          angle = atoi(receivedChars);
+          pulse[11]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
           spaceCounter++;
           ndx = 0;
-          }
-          }
-          else {
-          receivedChars[ndx] = '\0'; // terminate the string
-          //Serial.println(receivedChars);
-          BL_angles_3 = atoi(receivedChars);
-          recvInProgress = false;
-          ndx = 0;
-          spaceCounter = 0;
-          newData = true;
-          }
+        }
       }
+      else {
+        receivedChars[ndx] = '\0'; // terminate the string
+        //Serial.println(receivedChars);
+        pulse[11] = atoi(receivedChars);
+        recvInProgress = false;
+        ndx = 0;
+        spaceCounter = 0;
+        newData = true;
+      }
+    }
 
-      else if (rc == startMarker) {
-        recvInProgress = true;
-      }
+    else if (rc == startMarker) {
+      recvInProgress = true;
     }
   }
 }
+
 
 void batterieStatus() {
   batterieVoltage = analogRead(A1);
