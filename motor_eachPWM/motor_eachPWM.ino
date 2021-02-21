@@ -44,9 +44,9 @@ void loop() {
     pwm.setPWM(2,0,MOTOR2);   //motor2
     pwm.setPWM(4,0,MOTOR4);   //motor4
     pwm.setPWM(5,0,MOTOR5);   //motor5
-   // pwm.setPWM(7,0,MOTOR7);   //motor7
+    pwm.setPWM(7,0,MOTOR7);   //motor7
     pwm.setPWM(8,0,MOTOR8);   //motor8
-    //pwm.setPWM(10,0,MOTOR10); //motor10
+    pwm.setPWM(10,0,MOTOR10); //motor10
     pwm.setPWM(11,0,MOTOR11);  //motor11
 
    
