@@ -4,7 +4,7 @@
 #include <Adafruit_PWMServoDriver.h>
 
 Adafruit_PWMServoDriver pwm=Adafruit_PWMServoDriver();
-int servonum=0;
+
 void setup() {
   Serial.begin(9600);
   pwm.begin();
