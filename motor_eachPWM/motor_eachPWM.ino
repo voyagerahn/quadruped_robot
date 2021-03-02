@@ -37,9 +37,9 @@ int MOTOR10;
     MOTOR10 = constrain(map(a,90,0,312,420),312,420);      //HS-M7990TH mid 316   // moter10 
   }
   else{
-    MOTOR10 = constrain(map(a,180,90,180,312),177,312);
+    MOTOR10 = constrain(map(a,180,90,180,312),180,312);
   }
-    int MOTOR11 = constrain(map(a,0,180,190,429),190,432);     //HS-M7990TH mid 311   // moter11 
+    int MOTOR11 = constrain(map(a,0,180,190,429),190,429);     //HS-M7990TH mid 311   // moter11 
 
 // HIP
     int FR_HIP = constrain(map(b,-60,60,210,404),210,404);     //mg-996r  mid 307     //motor 0
