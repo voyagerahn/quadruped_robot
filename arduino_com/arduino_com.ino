@@ -121,84 +121,90 @@ void recvWithStartEndMarkers() {
         if (spaceCounter == 0) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[0]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[0]= constrain(map(angle, -60, 60, 210,404),210,404);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 1) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[1]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[1]= constrain(map(angle, -90, 90, 190,432),190,432);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 2) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[2]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[2]= constrain(map(angle, 90, -90, 190,432),190,432);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 3) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[3]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[3]= constrain(map(angle, 60, -60, 210,390),210,390);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 4) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[4]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[4]= constrain(map(angle, 90, -90, 177,416),170,418);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 5) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[5]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[5]= constrain(map(angle, -90, 90, 190,429),190,429);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 6) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[6]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[6]= constrain(map(angle, -60,60,198,416),198,416);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 7) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[7]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[7]= constrain(map(angle, -90, 90, 193,431),190,432);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 8) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[8]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[8]= constrain(map(angle, 90, -90, 190,427),190,427);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 9) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[9]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[9]= constrain(map(angle, 60,-60,210,390),210,390);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 10) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[10]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          if(angle<=0){
+          pulse[10] = constrain(map(angle,0,-90,312,420),312,420);      //HS-M7990TH mid 316   // moter10 
+             }
+           else{
+          pulse[10] = constrain(map(angle,90,0,180,312),180,312);
+             }
+    
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 11) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[11]= constrain(map(angle, -90, 90, 192, 436), 192, 436);
+          pulse[11]= constrain(map(angle, -90, 90, 190,429),190,429);
           spaceCounter++;
           ndx = 0;
         }
