@@ -13,6 +13,8 @@ from src.State import State
 from multiprocessing import Process
 #from src.HardwareInterface import HardwareInterface
 
+angle_offset = np.array([[0,0,0,0],[-23,-23,-23,-23],[46,46,46,46]])
+
 def consoleClear():
     # for windows
     if name == 'nt':
@@ -62,10 +64,11 @@ def main(id,command_status):
 
         # Step the controller forward by dt
         controller.run(state, command)
-        deg_angle=np.rad2deg(state.joint_angles)  # make angle rad to deg
+        deg_angle=np.rad2deg(state.joint_angles) + angle_offset # make angle rad to deg
+        print(deg_angle)
 
 
-        arduino.serialSend(state.joint_angles[:,0],state.joint_angles[:,1],state.joint_angles[:,2],state.joint_angles[:,3])
+        arduino.serialSend(deg_angle[:,0],deg_angle[:,1],deg_angle[:,2],deg_angle[:,3])
         consoleClear()
 
 

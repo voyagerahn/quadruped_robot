@@ -105,6 +105,7 @@ void recvWithStartEndMarkers() {
   char rc;
 
   while (Serial.available() > 0 && newData == false) {
+    int angle;
     rc = Serial.read();
     //Serial.println("serial In");
     if (recvInProgress == true) {
@@ -128,7 +129,7 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 1) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[1]= constrain(map(angle, -90, 90, 190,432),190,432);
+          pulse[1]= constrain(map(angle, 90, -90, 190,432),190,432);
           spaceCounter++;
           ndx = 0;
         }
@@ -142,14 +143,14 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 3) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[3]= constrain(map(angle, 60, -60, 210,390),210,390);
+          pulse[3]= constrain(map(angle, -60, 60, 210,390),210,390);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 4) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[4]= constrain(map(angle, 90, -90, 177,416),170,418);
+          pulse[4]= constrain(map(angle, -90, 90, 177,416),170,418);
           spaceCounter++;
           ndx = 0;
         }
@@ -170,7 +171,7 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 7) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[7]= constrain(map(angle, -90, 90, 193,431),190,432);
+          pulse[7]= constrain(map(angle, 90, -90, 193,431),190,432);
           spaceCounter++;
           ndx = 0;
         }
@@ -184,20 +185,19 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 9) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[9]= constrain(map(angle, 60,-60,210,390),210,390);
+          pulse[9]= constrain(map(angle, -60,60,210,390),210,390);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 10) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          if(angle<=0){
-          pulse[10] = constrain(map(angle,0,-90,312,420),312,420);      //HS-M7990TH mid 316   // moter10 
+          if(angle>=0){
+          pulse[10] = constrain(map(angle,0,90,312,420),312,420);      //HS-M7990TH mid 316   // moter10 
              }
            else{
-          pulse[10] = constrain(map(angle,90,0,180,312),180,312);
+          pulse[10] = constrain(map(angle,-90,0,180,312),180,312);
              }
-    
           spaceCounter++;
           ndx = 0;
         }
@@ -212,7 +212,7 @@ void recvWithStartEndMarkers() {
       else {
         receivedChars[ndx] = '\0'; // terminate the string
         //Serial.println(receivedChars);
-        pulse[11] = atoi(receivedChars);
+        angle = atoi(receivedChars);
         recvInProgress = false;
         ndx = 0;
         spaceCounter = 0;
