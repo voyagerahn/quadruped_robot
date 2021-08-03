@@ -1,7 +1,8 @@
 from src.Gaits import GaitController
 from src.StanceController import StanceController
 from src.SwingLegController import SwingController
-from src.State import BehaviorState
+from src.State import BehaviorState,State
+from src.Utilities import clipped_first_order_filter
 
 import numpy as np
 from transforms3d.euler import euler2mat, quat2euler
@@ -98,6 +99,7 @@ class Controller:
 
             # Construct foot rotation matrix to compensate for body tilt
             (roll, pitch, yaw) = quat2euler(state.quat_orientation)
+            print(roll,pitch,yaw)
             correction_factor = 0.8
             max_tilt = 0.4
             roll_compensation = correction_factor * np.clip(roll, -max_tilt, max_tilt)
@@ -162,7 +164,7 @@ class Controller:
         state.roll = command.roll
         state.height = command.height
 
-    def set_pose_to_default(self):
+    def set_pose_to_default(self,state,controller):
         state.foot_locations = (
             self.config.default_stance
             + np.array([0, 0, self.config.default_z_ref])[:, np.newaxis]

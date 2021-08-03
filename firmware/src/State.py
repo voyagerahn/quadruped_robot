@@ -24,3 +24,4 @@ class BehaviorState(Enum):  # to change mode
     TROT = 1
     HOP = 2
     FINISHHOP = 3
+    STAIR = 4

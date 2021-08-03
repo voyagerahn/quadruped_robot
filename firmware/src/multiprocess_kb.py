@@ -13,7 +13,7 @@ from multiprocessing import Process, Queue
 key_value_default = {'w': 0, 'a': 0, 's': 0, 'd': 0, 'q': 0, 'e': 0, 'move': False }
 control_offset = {'IDstepLength': 0.0, 'IDstepWidth': 0.0, 'IDstepAlpha': 0.0 }
 
-class KeyInterrupt(): 
+class KeyInterrupt():
 
     def __init__(self):
         # How many times Keys Pushed
@@ -26,8 +26,8 @@ class KeyInterrupt():
 
         # Offsets for Robot Control
         # Search calcRbStep for Usage
-        self.X_STEP = 0.4
-        self.Y_STEP = 0.3
+        self.X_STEP = 0.4 #0.4
+        self.Y_STEP = 0.3 #0.3
         self.YAW_STEP = 2.0
 
     def resetStatus(self):

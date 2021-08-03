@@ -46,15 +46,15 @@ class Configuration:
             0.10  # duration of the phase where all four feet are on the ground
         )
         self.swing_time = (
-            0.15  # duration of the phase when only two feet are on the ground
+            0.15  # duration of the phase when only two feet are on the ground 0.15
         )
 
-        ######################## GEOMETRY ######################
-        self.LEG_FB = 0.10  # front-back distance from center line to leg axis
-        self.LEG_LR = 0.04  # left-right distance from center line to leg plane
-        self.LEG_L2 = 0.115
-        self.LEG_L1 = 0.1235
-        self.ABDUCTION_OFFSET = 0.03  # distance from abduction axis to leg
+        ######################## GEOMETRY ##################### unit [m]
+        self.LEG_FB = 0.1325  # front-back distance from center line to leg axis
+        self.LEG_LR = 0.08  # left-right distance from center line to leg plane
+        self.LEG_L2 = 0.115 # Thigh leg
+        self.LEG_L1 = 0.164 # Shin leg
+        self.ABDUCTION_OFFSET = 0.00  # distance from abduction axis to leg
         self.FOOT_RADIUS = 0.01
 
         self.HIP_L = 0.0394
@@ -62,8 +62,8 @@ class Configuration:
         self.HIP_T = 0.0214
         self.HIP_OFFSET = 0.0132
 
-        self.L = 0.276
-        self.W = 0.100
+        self.L = 0.350
+        self.W = 0.130
         self.T = 0.050
 
         self.LEG_ORIGINS = np.array(
