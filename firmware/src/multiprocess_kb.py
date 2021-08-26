@@ -26,9 +26,9 @@ class KeyInterrupt():
 
         # Offsets for Robot Control
         # Search calcRbStep for Usage
-        self.X_STEP = 0.4 #0.4
-        self.Y_STEP = 0.3 #0.3
-        self.YAW_STEP = 2.0
+        self.X_STEP = 0.2  #0.4
+        self.Y_STEP = 0.075 #0.3
+        self.YAW_STEP = 0.5
 
     def resetStatus(self):
         result_dict = self.key_status.get()

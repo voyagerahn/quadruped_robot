@@ -1,14 +1,15 @@
 #include <Servo.h>
 #include <math.h>
 #include <Adafruit_PWMServoDriver.h>
-#include <IMU.h>
+//#include <IMU.h>
+
 #define MAX_GAMMA 50
 ///VARIABLES SERVOMOTORES
 #define MAX_SERVOS 12
-#define MAX_PULSE 443
-#define MIN_PULSE 197
+#define MAX_PULSE 432
+#define MIN_PULSE 188
 Servo Servos[MAX_SERVOS];
-cIMU    IMU;
+//cIMU    IMU;
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 
@@ -45,7 +46,7 @@ void setup() {
 
   pwm.begin();
   pwm.setPWMFreq(50);
-  IMU.begin();
+  //IMU.begin();
 
   setPulse();
   pinMode(13, OUTPUT);
@@ -103,7 +104,7 @@ void moveServos(int *pulse) {
 
 void read_accel(){
  static uint32_t tTime[3];
-  static uint32_t imu_time = 0;
+  //static uint32_t imu_time = 0;
 
 
   if( (millis()-tTime[0]) >= 500 )
@@ -113,7 +114,7 @@ void read_accel(){
   }
 
   tTime[2] = micros();
-  if( IMU.update() > 0 ) imu_time = micros()-tTime[2];
+  //if( IMU.update() > 0 ) imu_time = micros()-tTime[2];
 
   if( (millis()-tTime[1]) >= 50 )
   {
@@ -121,9 +122,9 @@ void read_accel(){
 
    //Serial.print(imu_time);
     Serial.print("<");
-    Serial.print(IMU.accRaw[0]);    // ACC X
+    //Serial.print(IMU.accRaw[0]);    // ACC X
     Serial.print("#");
-    Serial.print(IMU.accRaw[1]);    // ACC Y
+    //Serial.print(IMU.accRaw[1]);    // ACC Y
     Serial.print("#");
     //Serial.print(IMU.accRaw[2]);    // ACC Z
     //Serial.println(">");
@@ -135,7 +136,7 @@ void read_accel(){
 void read_axes()
 {
   static uint32_t tTime[3];
-  static uint32_t imu_time = 0;
+  //static uint32_t imu_time = 0;
 
 
   if( (millis()-tTime[0]) >= 500 )
@@ -144,7 +145,7 @@ void read_axes()
     }
 
   tTime[2] = micros();
-  if( IMU.update() > 0 ) imu_time = micros()-tTime[2];
+  //if( IMU.update() > 0 ) imu_time = micros()-tTime[2];
 
   if( (millis()-tTime[1]) >= 50 )
   {
@@ -152,9 +153,9 @@ void read_axes()
 
   //Serial.print(imu_time);
    // Serial.print("<");
-    Serial.print(IMU.rpy[0]);       //roll
+   // Serial.print(IMU.rpy[0]);       //roll
     Serial.print("#");
-    Serial.print(IMU.rpy[1]);       //pitch
+    //Serial.print(IMU.rpy[1]);       //pitch
     //Serial.print("#");
     //Serial.println(IMU.rpy[2]);     //yaw
     Serial.print(">");
@@ -191,7 +192,7 @@ void recvWithStartEndMarkers() {
         if (spaceCounter == 0) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[0]= constrain(map(angle, -60, 60, 235,415),235,415);
+          pulse[0]= constrain(map(angle, -60, 60, 220,414),220,414);
           spaceCounter++;
           ndx = 0;
         }
@@ -205,14 +206,14 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 2) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[2]= constrain(map(angle, 90, -90, MIN_PULSE,MAX_PULSE),MIN_PULSE,MAX_PULSE);
+          pulse[2]= constrain(map(angle, 90, -90, 184,430),184,430);
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 3) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[3]= constrain(map(angle, -60, 60, 245,425),245,425);
+          pulse[3]= constrain(map(angle, -60, 60, 230,410),230,410);
           spaceCounter++;
           ndx = 0;
         }
@@ -226,7 +227,7 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 5) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[5]= constrain(map(angle, -90, 90, MIN_PULSE,MAX_PULSE),MIN_PULSE,MAX_PULSE);
+          pulse[5]= constrain(map(angle, -90, 90, 184,430),184,430);
           spaceCounter++;
           ndx = 0;
         }
@@ -247,7 +248,7 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 8) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[8]= constrain(map(angle, 90, -90, MIN_PULSE,MAX_PULSE),MIN_PULSE,MAX_PULSE);
+          pulse[8]= constrain(map(angle, 90, -90, 184,430),184,430);
           spaceCounter++;
           ndx = 0;
         }
@@ -261,15 +262,19 @@ void recvWithStartEndMarkers() {
         else if (spaceCounter == 10) {
           //Serial.println(receivedChars);
           angle = atoi(receivedChars);
-          pulse[10]= constrain(map(angle, -90, 90, 184,430),184,430);
+          if(angle>=0){
+          pulse[10] = constrain(map(angle,0,90,312,420),312,420);      //HS-M7990TH mid 316   // moter10
+             }
+           else{
+          pulse[10] = constrain(map(angle,-90,0,180,312),180,312);
+             }
           spaceCounter++;
           ndx = 0;
         }
         else if (spaceCounter == 11) {
           //Serial.println(receivedChars);
-          
           angle = atoi(receivedChars);
-          pulse[11]= constrain(map(angle, -90, 90, MIN_PULSE,MAX_PULSE),MIN_PULSE,MAX_PULSE);
+          pulse[11]= constrain(map(angle, -90, 90, 184,430),184,430);
           spaceCounter++;
           ndx = 0;
         }

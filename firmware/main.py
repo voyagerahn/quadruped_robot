@@ -15,14 +15,20 @@ from multiprocessing import Process
 
 # from src.HardwareInterface import HardwareInterface
 
-angle_offset = np.array([[0 ,0 ,0 ,0] ,[-23 ,-23 ,0 ,0] ,[69 ,69 ,92 ,92]])
+#angle_offset = np.array([[0 ,0 ,0 ,0] ,[0, 0, 0 ,0] ,[69 ,69 ,92 ,92]])
 
 def consoleClear():
-    _ = system('clear')
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+        # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
 def main(id ,command_status):
 
-    arduino = ArduinoSerial('/dev/cu.usbmodemFFFFFFFEFFFF1')  # need to specify the serial port
+    arduino = ArduinoSerial('COM4')  # need to specify the serial port
 
     # Create config
     config = Configuration()
@@ -41,7 +47,7 @@ def main(id ,command_status):
     joystick_interface = JoystickInterface(config)
     print("Done.")
    
-    while True:
+    while True:`
         print("Waiting for L1 to activate robot.")
         while True:
             command = joystick_interface.get_command(state)
@@ -111,12 +117,12 @@ def main(id ,command_status):
         # Step the controller forward by dt
         controller.run(state, command)
 
-        deg_angle =np.rad2deg(state.joint_angles) + angle_offset  # make angle rad to deg
+        deg_angle =np.rad2deg(state.joint_angles)# + angle_offset  # make angle rad to deg
         print(deg_angle)
 
 
         arduino.serialSend(deg_angle[: ,0] ,deg_angle[: ,1] ,deg_angle[: ,2] ,deg_angle[: ,3])
-        #consoleClear()
+        consoleClear()
 
 
 if __name__ == '__main__':

@@ -37,24 +37,25 @@ class Configuration:
         )
 
         #################### GAIT #######################
-        self.dt = 0.01
+        self.dt = 0.005  #0.01
         self.num_phases = 4
         self.contact_phases = np.array(
-            [[1, 1, 1, 0], [1, 0, 1, 1], [1, 0, 1, 1], [1, 1, 1, 0]]
+            #[[1, 1, 1, 0], [1, 0, 1, 1], [1, 0, 1, 1], [1, 1, 1, 0]]
+            [[1, 1, 1, 0], [1, 0, 1, 1], [1, 1, 0, 1], [0, 1, 1, 1]]
         )
         self.overlap_time = (
-            0.10  # duration of the phase where all four feet are on the ground
+            0.10  # duration of the phase where all four feet are on the ground 0.10
         )
         self.swing_time = (
             0.15  # duration of the phase when only two feet are on the ground 0.15
         )
 
         ######################## GEOMETRY ##################### unit [m]
-        self.LEG_FB = 0.1325  # front-back distance from center line to leg axis
-        self.LEG_LR = 0.08  # left-right distance from center line to leg plane
-        self.LEG_L2 = 0.115 # Thigh leg
-        self.LEG_L1 = 0.164 # Shin leg
-        self.ABDUCTION_OFFSET = 0.00  # distance from abduction axis to leg
+        self.LEG_FB = 0.10  # front-back distance from center line to leg axis
+        self.LEG_LR = 0.06  # left-right distance from center line to leg plane
+        self.LEG_L2 = 0.125 # Thigh leg 0.115
+        self.LEG_L1 = 0.130 # Shin leg 0.1235
+        self.ABDUCTION_OFFSET = 0.02  # distance from abduction axis to leg
         self.FOOT_RADIUS = 0.01
 
         self.HIP_L = 0.0394

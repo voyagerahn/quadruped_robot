@@ -82,6 +82,7 @@ class Controller:
             state.behavior_state = self.hop_transition_mapping[state.behavior_state]
         """
         state.behavior_state = BehaviorState.TROT
+        location_offsets = [[0.16,0.16,0.16,0.16],[0,0,0,0],[0.05,0.05,0.05,0.05]] # [[-0.06,-0.06,-0.06,-0.06],[0,0,0,0],[-0.4,-0.4,-0.4,-0.4]]
 
         if state.behavior_state == BehaviorState.TROT:
             state.foot_locations, contact_modes = self.step_gait(
@@ -99,14 +100,13 @@ class Controller:
 
             # Construct foot rotation matrix to compensate for body tilt
             (roll, pitch, yaw) = quat2euler(state.quat_orientation)
-            print(roll,pitch,yaw)
             correction_factor = 0.8
             max_tilt = 0.4
             roll_compensation = correction_factor * np.clip(roll, -max_tilt, max_tilt)
             pitch_compensation = correction_factor * np.clip(pitch, -max_tilt, max_tilt)
             rmat = euler2mat(roll_compensation, pitch_compensation, 0)
 
-            rotated_foot_locations = rmat.T @ rotated_foot_locations
+            rotated_foot_locations = rmat.T @ rotated_foot_locations + location_offsets
 
             state.joint_angles = self.inverse_kinematics(
                 rotated_foot_locations, self.config
