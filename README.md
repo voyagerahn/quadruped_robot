@@ -1,16 +1,12 @@
-# Stanford Quadruped
+# GongNeungdynamics Quadruped Robot
 
 ## Overview
 This repository hosts the code for Stanford Pupper and Stanford Woofer, Raspberry Pi-based quadruped robots that can trot, walk, and jump. 
 
-![Pupper CC Max Morse](https://live.staticflickr.com/65535/49614690753_78edca83bc_4k.jpg)
 
-Video of pupper in action: https://youtu.be/NIjodHA78UE
+Video of robot in action: 
 
-Project page: https://stanfordstudentrobotics.org/pupper
-
-Documentation & build guide: https://pupper.readthedocs.io/en/latest/
-
+Documentation & build guide: 
 ## How it works
 ![Overview diagram](imgs/diagram1.jpg)
 The main program is ```run_robot.py``` which is located in this directory. The robot code is run as a loop, with a joystick interface, a controller, and a hardware interface orchestrating the behavior. 
@@ -28,7 +24,7 @@ The swing controller picks up the feet that just finished their stance phase, an
 Both the stance and swing controllers generate target positions for the feet in cartesian coordinates relative the body center of mass. It's convenient to work in cartesian coordinates for the stance and swing planning, but we now need to convert them to motor angles. This is done by using an inverse kinematics model, which maps between cartesian body coordinates and motor angles. These motor angles, also called joint angles, are then populated into the ```state``` variable and returned by the model. 
 
 
-## How to Build Pupper
+## How to Build robot
 Main documentation: https://pupper.readthedocs.io/en/latest/
 
 You can find the bill of materials, pre-made kit purchasing options, assembly instructions, software installation, etc at this website.

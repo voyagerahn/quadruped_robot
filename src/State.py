@@ -17,7 +17,8 @@ class State:
         self.joint_angles = np.zeros((3, 4))
 
         self.behavior_state = BehaviorState.REST
-
+        self.last_state = BehaviorState.REST
+        self.capture_state = False
 
 class BehaviorState(Enum):
     DEACTIVATED = -1

@@ -75,10 +75,17 @@ class Controller:
         ########## Update operating state based on command ######
         if command.activate_event:
             state.behavior_state = self.activate_transition_mapping[state.behavior_state]
+            state.last_state = state.behavior_state
         elif command.trot_event:
             state.behavior_state = self.trot_transition_mapping[state.behavior_state]
+            state.last_state = state.behavior_state
         elif command.hop_event:
-            state.behavior_state = self.hop_transition_mapping[state.behavior_state]
+            state.behavior_state = self.hop_transition_mapping[state.behavior_state] 
+            state.last_state = state.behavior_state
+        elif command.capture_event:
+            state.last_state = state.behavior_state
+            state.capture_state = True
+
 
         if state.behavior_state == BehaviorState.TROT:
             state.foot_locations, contact_modes = self.step_gait(
@@ -111,20 +118,22 @@ class Controller:
         elif state.behavior_state == BehaviorState.HOP:
             state.foot_locations = (
                 self.config.default_stance
-                + np.array([0, 0, -0.09])[:, np.newaxis]
+                + np.array([0, 0, -0.02])[:, np.newaxis]
             )
             state.joint_angles = self.inverse_kinematics(
                 state.foot_locations, self.config
             )
+            print("Hop")
 
         elif state.behavior_state == BehaviorState.FINISHHOP:
             state.foot_locations = (
                 self.config.default_stance
-                + np.array([0, 0, -0.22])[:, np.newaxis]
+                + np.array([0, 0, -0.16])[:, np.newaxis]
             )
             state.joint_angles = self.inverse_kinematics(
                 state.foot_locations, self.config
             )
+            print("FinshHop")
 
         elif state.behavior_state == BehaviorState.REST:
             yaw_proportion = command.yaw_rate / self.config.max_yaw_rate
@@ -154,11 +163,13 @@ class Controller:
             state.joint_angles = self.inverse_kinematics(
                 rotated_foot_locations, self.config
             )
+            print("Rest")
 
         state.ticks += 1
         state.pitch = command.pitch
         state.roll = command.roll
         state.height = command.height
+        #print(rotated_foot_locations)
 
     def set_pose_to_default(self):
         state.foot_locations = (

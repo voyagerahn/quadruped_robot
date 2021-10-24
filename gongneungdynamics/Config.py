@@ -1,6 +1,6 @@
 import numpy as np
-from pupper.ServoCalibration import MICROS_PER_RAD, NEUTRAL_ANGLE_DEGREES
-from pupper.HardwareConfig import PS4_COLOR, PS4_DEACTIVATED_COLOR
+from gongneungdynamics.ServoCalibration import MICROS_PER_RAD, NEUTRAL_ANGLE_DEGREES
+from gongneungdynamics.HardwareConfig import PS4_COLOR, PS4_DEACTIVATED_COLOR
 from enum import Enum
 
 # TODO: put these somewhere else
@@ -35,9 +35,9 @@ class Configuration:
         self.ps4_deactivated_color = PS4_DEACTIVATED_COLOR    
 
         #################### COMMANDS ####################
-        self.max_x_velocity = 0.4
-        self.max_y_velocity = 0.3
-        self.max_yaw_rate = 2.0
+        self.max_x_velocity = 0.2
+        self.max_y_velocity = 0.15
+        self.max_yaw_rate = 1.0
         self.max_pitch = 30.0 * np.pi / 180.0
         
         #################### MOVEMENT PARAMS ####################
@@ -82,10 +82,10 @@ class Configuration:
 
         ######################## GEOMETRY ######################
         self.LEG_FB = 0.10  # front-back distance from center line to leg axis
-        self.LEG_LR = 0.04  # left-right distance from center line to leg plane
-        self.LEG_L2 = 0.115
-        self.LEG_L1 = 0.1235
-        self.ABDUCTION_OFFSET = 0.03  # distance from abduction axis to leg
+        self.LEG_LR = 0.06  # left-right distance from center line to leg plane
+        self.LEG_L2 = 0.125
+        self.LEG_L1 = 0.130
+        self.ABDUCTION_OFFSET = 0.01  # distance from abduction axis to leg
         self.FOOT_RADIUS = 0.01
 
         self.HIP_L = 0.0394
@@ -93,8 +93,8 @@ class Configuration:
         self.HIP_T = 0.0214
         self.HIP_OFFSET = 0.0132
 
-        self.L = 0.276
-        self.W = 0.100
+        self.L = 0.350
+        self.W = 0.130
         self.T = 0.050
 
         self.LEG_ORIGINS = np.array(

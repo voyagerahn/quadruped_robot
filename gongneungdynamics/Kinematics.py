@@ -53,7 +53,7 @@ def leg_explicit_inverse_kinematics(r_body_foot, leg_index, config):
     trident = np.arccos(arccos_argument)
 
     # Angle of the first link relative to the tilted negative z axis
-    hip_angle = theta + trident
+    hip_angle = theta + trident #+ np.deg2rad(74)
 
     # Angle between the leg links L1 and L2
     arccos_argument = (config.LEG_L1 ** 2 + config.LEG_L2 ** 2 - R_hip_foot ** 2) / (
@@ -63,7 +63,7 @@ def leg_explicit_inverse_kinematics(r_body_foot, leg_index, config):
     beta = np.arccos(arccos_argument)
 
     # Angle of the second link relative to the tilted negative z axis
-    knee_angle = hip_angle - (np.pi - beta)
+    knee_angle = hip_angle - (np.pi - beta) #+ np.deg2rad(74)
 
     return np.array([abduction_angle, hip_angle, knee_angle])
 
